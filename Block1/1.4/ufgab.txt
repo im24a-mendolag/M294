@@ -1,3 +1,4 @@
 inspect de website 
 gahn bi debugger 
 rightclick en line um en breakpoint zu setzen
+rightclick uf de breakpoint um en conition zu setzen
