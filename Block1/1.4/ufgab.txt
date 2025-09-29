@@ -1,0 +1,3 @@
+inspect de website 
+gahn bi debugger 
+rightclick en line um en breakpoint zu setzen
