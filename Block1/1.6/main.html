@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Begrüßung</title>
+</head>
+<body>
+  <script>
+    let name = prompt("Wie heisst du?");
+
+    let stunde = new Date().getHours();
+    let begruessung = "";
+
+    if (stunde >= 5 && stunde < 10) {
+      begruessung = "Guten Morgen " + name;
+    } else if (stunde >= 10 && stunde < 18) {
+      begruessung = "Guten Tag " + name;
+    } else if (stunde >= 18 && stunde < 22) {
+      begruessung = "Guten Abend " + name;
+    } else {
+      begruessung = "Gute Nacht " + name;
+    }
+    alert(begruessung);
+  </script>
+</body>
+</html>

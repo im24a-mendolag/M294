@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>guess</title>
+</head>
+<body>
+  <script>
+    let guess = prompt("guess a number between 1 and 100");
+
+    let answer = Math.floor(Math.random() * 100)
+    if (answer == guess) {
+      alert("you guessed right!");
+    } 
+    else {
+        alert("you guessed wrong!")
+    }
+  </script>
+</body>
+</html>
