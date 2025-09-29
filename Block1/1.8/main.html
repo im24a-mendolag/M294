@@ -6,14 +6,32 @@
 </head>
 <body>
   <script>
-    const arr = []
+    const numbers = []
     let number = prompt("write a number");
 
     while (Number(number)) {
+        numbers.push(Number(number))
         number = prompt("write a number");
-        arr.push(number)
     }
-    alert(arr)
+
+    let operation = prompt("Choose an operation: +, *, -, /");
+
+    let result = null;
+while (result === null ) {
+    if (operation.toLowerCase() === "+") {
+        result = numbers.reduce((a, b) => a + b, 0);
+    } else if (operation.toLowerCase() === "*") {
+        result = numbers.reduce((a, b) => a * b, 1);
+    } else if (operation.toLowerCase() === "-") {
+        result = numbers.reduce((a, b) => a - b);
+    } else if (operation.toLowerCase() === "/") {
+        result = numbers.reduce((a, b) => a / b);
+    } else {
+        alert("Unknown operation!");
+        operation = prompt("Choose an operation: +, *, -, /");
+    }}
+
+    alert(result)
   </script>
 </body>
 </html>
