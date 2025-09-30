@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spoofify</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Spoofify</h1>
+    <div class="buttons">
+      <button>Top of your birthweek</button>
+      <button>Latest releases randomized</button>
+    </div>
+  </header>
+
+  <main>
+    <h2>Your spoofed overview</h2>
+    <p>Welcome to Spoofify, <em>the rip-off music streaming service</em> of ICT Module 291!</p>
+
+    <section>
+      <h3>Top of your birthweek</h3>
+      <ol>
+        <li><strong>Jump</strong> by <em>Kris Kross</em></li>
+        <li><strong>My Lovin' (You're Never Gonna Get It)</strong> by <em>En Vogue</em></li>
+        <li><strong>Bohemian Rhapsody</strong> by <em>Queen</em></li>
+        <li><strong>Save The Best For Last</strong> by <em>Vanessa Williams</em></li>
+        <li><strong>Live And Learn</strong> by <em>Joe Public</em></li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Latest releases randomized</h3>
+      <div class="buttons">
+      <button id="add">Add 3 albums</button>
+      <button id="remove">Remove 3 albums</button>
+    </div>
+
+      <div class="albums" id="albums">
+        <img src="https://picsum.photos/200?random=1" alt="Album 1">
+        <img src="https://picsum.photos/200?random=2" alt="Album 2">
+        <img src="https://picsum.photos/200?random=3" alt="Album 3">
+        <img src="https://picsum.photos/200?random=4" alt="Album 4">
+        <img src="https://picsum.photos/200?random=5" alt="Album 5">
+        <img src="https://picsum.photos/200?random=6" alt="Album 6">
+      </div>
+
+    </section>
+  </main>
+      <script>
+        function remove() {
+            const childs = document.querySelectorAll(".albums img:nth-last-child(-n+3)");
+            childs.forEach(elem => elem.remove())
+        }
+        let rembutton = document.getElementById("remove")
+        rembutton.addEventListener("click", remove)
+
+        let count = 1
+        function add() {
+            for (let i = 0; i < 3; i++) {
+              let newimg = document.createElement("img")
+              let div = document.getElementById("albums")
+              newimg.src = `https://picsum.photos/200?random=${i+6+count}`
+              div.appendChild(newimg)
+              count ++
+            }
+        }
+        let addbutton = document.getElementById("add")
+        addbutton.addEventListener("click", add)
+
+    </script>
+</body>
+</html>

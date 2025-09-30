@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scroll Fade / Slide Effekt Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section id="sec1" class="slide-from-left">
+    <h2>Sektion 1</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci risus. Cras vel urna odio. Integer volutpat dui nisi, nec tincidunt erat interdum sit amet. Phasellus venenatis tincidunt justo, ut porta tortor vulputate nec. Curabitur semper sapien ac metus sodales varius.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vulputate quam ac tellus lobortis, in porttitor orci pellentesque. Donec quis nisi non libero vestibulum ultricies. Integer sit amet magna dictum, cursus quam sed, gravida leo.
+    </p>
+  </section>
+
+  <section id="sec2" class="slide-from-right">
+    <h2>Sektion 2</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci risus. Cras vel urna odio. Integer volutpat dui nisi, nec tincidunt erat interdum sit amet. Phasellus venenatis tincidunt justo, ut porta tortor vulputate nec. Curabitur semper sapien ac metus sodales varius.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vulputate quam ac tellus lobortis, in porttitor orci pellentesque. Donec quis nisi non libero vestibulum ultricies. Integer sit amet magna dictum, cursus quam sed, gravida leo.
+    </p>
+  </section>
+
+  <section id="sec3" class="">
+    <h2>Sektion 3</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci risus. Cras vel urna odio. Integer volutpat dui nisi, nec tincidunt erat interdum sit amet. Phasellus venenatis tincidunt justo, ut porta tortor vulputate nec. Curabitur semper sapien ac metus sodales varius.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vulputate quam ac tellus lobortis, in porttitor orci pellentesque. Donec quis nisi non libero vestibulum ultricies. Integer sit amet magna dictum, cursus quam sed, gravida leo.
+    </p>
+  </section>
+
+  <section id="sec4" class="slide-from-left">
+    <h2>Sektion 4</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci risus. Cras vel urna odio. Integer volutpat dui nisi, nec tincidunt erat interdum sit amet. Phasellus venenatis tincidunt justo, ut porta tortor vulputate nec. Curabitur semper sapien ac metus sodales varius.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vulputate quam ac tellus lobortis, in porttitor orci pellentesque. Donec quis nisi non libero vestibulum ultricies. Integer sit amet magna dictum, cursus quam sed, gravida leo.
+    </p>
+  </section>
+
+  <section id="sec5" class="slide-from-right">
+    <h2>Sektion 5</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci risus. Cras vel urna odio. Integer volutpat dui nisi, nec tincidunt erat interdum sit amet. Phasellus venenatis tincidunt justo, ut porta tortor vulputate nec. Curabitur semper sapien ac metus sodales varius.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vulputate quam ac tellus lobortis, in porttitor orci pellentesque. Donec quis nisi non libero vestibulum ultricies. Integer sit amet magna dictum, cursus quam sed, gravida leo.
+    </p>
+  </section>
+
+  <script>
+    const elemlist = document.querySelectorAll("section")
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
+
+    function changevisibility (list) {
+      elemlist.forEach(elem => {
+        elem.classList.add('visible');
+      })
+    }
+    
+
+  </script>
+
+</body>
+</html>

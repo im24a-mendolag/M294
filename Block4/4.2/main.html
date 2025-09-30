@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scroll Fade / Slide Effekt Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section id="sec1" class="slide-from-left">
+    <h2>Sektion 1</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci risus. Cras vel urna odio. Integer volutpat dui nisi, nec tincidunt erat interdum sit amet. Phasellus venenatis tincidunt justo, ut porta tortor vulputate nec. Curabitur semper sapien ac metus sodales varius.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vulputate quam ac tellus lobortis, in porttitor orci pellentesque. Donec quis nisi non libero vestibulum ultricies. Integer sit amet magna dictum, cursus quam sed, gravida leo.
+    </p>
+  </section>
+
+  <section id="sec2" class="slide-from-right">
+    <h2>Sektion 2</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci risus. Cras vel urna odio. Integer volutpat dui nisi, nec tincidunt erat interdum sit amet. Phasellus venenatis tincidunt justo, ut porta tortor vulputate nec. Curabitur semper sapien ac metus sodales varius.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vulputate quam ac tellus lobortis, in porttitor orci pellentesque. Donec quis nisi non libero vestibulum ultricies. Integer sit amet magna dictum, cursus quam sed, gravida leo.
+    </p>
+  </section>
+
+  <section id="sec3" class="">
+    <h2>Sektion 3</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci risus. Cras vel urna odio. Integer volutpat dui nisi, nec tincidunt erat interdum sit amet. Phasellus venenatis tincidunt justo, ut porta tortor vulputate nec. Curabitur semper sapien ac metus sodales varius.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vulputate quam ac tellus lobortis, in porttitor orci pellentesque. Donec quis nisi non libero vestibulum ultricies. Integer sit amet magna dictum, cursus quam sed, gravida leo.
+    </p>
+  </section>
+
+  <section id="sec4" class="slide-from-left">
+    <h2>Sektion 4</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci risus. Cras vel urna odio. Integer volutpat dui nisi, nec tincidunt erat interdum sit amet. Phasellus venenatis tincidunt justo, ut porta tortor vulputate nec. Curabitur semper sapien ac metus sodales varius.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vulputate quam ac tellus lobortis, in porttitor orci pellentesque. Donec quis nisi non libero vestibulum ultricies. Integer sit amet magna dictum, cursus quam sed, gravida leo.
+    </p>
+  </section>
+
+  <section id="sec5" class="slide-from-right">
+    <h2>Sektion 5</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci risus. Cras vel urna odio. Integer volutpat dui nisi, nec tincidunt erat interdum sit amet. Phasellus venenatis tincidunt justo, ut porta tortor vulputate nec. Curabitur semper sapien ac metus sodales varius.
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vulputate quam ac tellus lobortis, in porttitor orci pellentesque. Donec quis nisi non libero vestibulum ultricies. Integer sit amet magna dictum, cursus quam sed, gravida leo.
+    </p>
+  </section>
+
+  <script>
+    // Variante 1: mit Intersection Observer (empfohlen, moderner)
+    document.addEventListener("DOMContentLoaded", function() {
+      const sections = document.querySelectorAll("section");
+
+      const observerOptions = {
+        root: null, // viewport
+        rootMargin: "0px",
+        threshold: 0.2 // wenn 20 % sichtbar sind, dann auslösen
+      };
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            // Wenn man den Effekt nur einmal ausführen will:
+            obs.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach(sec => {
+        observer.observe(sec);
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: steelblue;
+      margin: 20px auto;
+      border-radius: 0;
+      transform: translateX(0);
+      transition: 
+        background-color 1s linear,
+        width 1s ease-in-out,
+        height 1s ease-in-out,
+        border-radius 1s ease-in,
+        transform 1s ease-out;
+    }
+
+    .box.active {
+      background-color: tomato;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      transform: translateX(150px);
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: darkslateblue;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: slateblue;
+    }

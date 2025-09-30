@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>guess</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="counter">
+            <h1 id="counter1">0</h1>
+            <button id="button">Click me</button>
+        </div>
+
+        <div id="rectangle">
+            <img src="soccer-ball-svgrepo-com.png" id="ball_img">
+        </div>
+
+        <div class="counter">
+            <h1 id="counter2">0</h1>
+            <button id="button2">Click me</button>
+        </div>
+    </div>
+
+    <script>
+        function increment(id) {
+            let heading = document.getElementById(id);
+            let currentValue = parseInt(heading.innerText);
+            heading.innerText = currentValue + 1;
+        }
+
+        function moveBall(direction) {
+            const ball = document.querySelector('#rectangle img');
+
+            if (direction === 'left') {
+                ball.classList.add('move_left');
+            } else if (direction === 'right') {
+                ball.classList.add('move_right');
+            }
+
+            // Return to center after animation
+            setTimeout(() => {
+                ball.classList.remove('move_left', 'move_right');
+            }, 500);
+}
+        button.onclick = () => {increment("counter1"); moveBall('right');}
+        button2.onclick = () => {increment("counter2"); moveBall('left');}
+
+        const rectangle = document.querySelector('#rectangle');
+        const ball = document.querySelector('#ball_img');
+
+        rectangle.addEventListener('click', (event) => {
+            const x = event.offsetX - ball.offsetWidth/2;
+            const y = event.offsetY - ball.offsetHeight/2;
+            ball.style.left = x + 'px';
+            ball.style.top = y + 'px';
+        }
+
+        )
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      line-height: 1.6;
+    }
+    section {
+      min-height: 100vh;
+      padding: 50px;
+      box-sizing: border-box;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    /* Alternativ: von links / rechts einblenden */
+    section.slide-from-left {
+      transform: translateX(-100px);
+    }
+    section.visible.slide-from-left {
+      transform: translateX(0);
+    }
+    section.slide-from-right {
+      transform: translateX(100px);
+    }
+    section.visible.slide-from-right {
+      transform: translateX(0);
+    }
