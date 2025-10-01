@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Begrüßung</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="form">
+        <input type="text" name="name" placeholder="Dein Name">
+        <button type="submit">Absenden</button>
+    </form>
+
+    <div id="myModal" class="modal">
+        <div class="modal-button">
+            <p id="abgab"></p>
+            <button class="btn btn-ok" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("form");
+        const modal = document.getElementById("myModal");
+        const abgab = document.getElementById("abgab");
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault(); 
+
+            let name = form.name.value.trim();
+            let stunde = new Date().getHours();
+            let begruessung = "";
+
+            if (stunde >= 5 && stunde < 10) {
+                begruessung = "Guten Morgen " + name;
+            } else if (stunde >= 10 && stunde < 18) {
+                begruessung = "Guten Tag " + name;
+            } else if (stunde >= 18 && stunde < 22) {
+                begruessung = "Guten Abend " + name;
+            } else {
+                begruessung = "Gute Nacht " + name;
+            }
+
+            abgab.innerText = begruessung;
+            modal.style.display = "flex"; // Modal öffnen
+        });
+
+        function closeModal() {
+            modal.style.display = "none"; // Modal schließen
+        }
+    </script>
+</body>
+</html>
