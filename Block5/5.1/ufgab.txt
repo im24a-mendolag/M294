@@ -1,0 +1,27 @@
+Rating
+
+Name und Synonyme:
+Rating, Sternebewertung, Bewertungsskala
+
+Einsatzzweck und Funktion:
+Ein Rating ist eine UI-Komponente, die es Benutzern ermöglicht, eine Bewertung in Form von Symbolen abzugeben. 
+Durch die visuelle Darstellung (z. B. 1 bis 5 Sterne) wird die Benutzerfreundlichkeit erhöht und 
+Rückmeldungen können schnell erfasst und ausgewertet werden.
+
+Screenshots (Beispiele):
+Block5/5.1/Screenshot 2025-10-01 085741.jpg
+
+
+
+
+Modal / Dialog
+
+Name und Synonyme:
+Modal, Dialog, Pop-up Fenster, Overlay
+
+Einsatzzweck und Funktion:
+Ein Modal (oder Dialog) ist ein überlagerndes Fenster, das den Benutzer zwingt, sich mit einer bestimmten Information oder Aktion auseinanderzusetzen, bevor er zurück zur Hauptseite kehren kann. Typische Einsatzzwecke sind Bestätigungsdialoge (z. B. „Möchten Sie wirklich löschen?“), Formulareingaben, Hinweise oder Login-Fenster. Da Modals den Hintergrund ausgrauen oder sperren, erhalten sie die volle Aufmerksamkeit des Benutzers. Sie sollten sparsam eingesetzt werden, um die Nutzerfreundlichkeit nicht zu beeinträchtigen.
+
+Screenshots (Beispiele):
+(Desktop und Mobile)
+

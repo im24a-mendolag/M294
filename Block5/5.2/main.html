@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Delete User Example</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="deleteBtn">Delete User</button>
+
+  <!-- Custom modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-button">
+      <p>Are you sure?</p>
+      <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-delete" onclick="deleteUser()">Delete</button>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("myModal");
+    const deleteBtn = document.getElementById("deleteBtn");
+
+    // Show modal when clicking delete
+    deleteBtn.onclick = function() {
+      modal.style.display = "flex";
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    function deleteUser() {
+      modal.style.display = "none";
+      alert("User deleted!");
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>
