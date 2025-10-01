@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>guess</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="myModal" class="modal">
+        <div class="modal-button">
+            <p id="abgab"></p>
+            <button class="btn btn-ok" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <form id="form">
+        <input type="text" name="number" placeholder="nummer">
+        <button type="submit">Absenden</button>
+    </form>
+
+  <script>
+    const form = document.getElementById("form");
+    const modal = document.getElementById("myModal");
+    const abgab = document.getElementById("abgab");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault(); 
+
+        let guess = parseInt(form.number.value.trim()); // Eingabe holen
+        let answer = Math.floor(Math.random() * 100) + 1; // 1-100
+
+        if (guess === answer) {
+            abgab.innerText = "You guessed right! (" + answer + ")";
+        } else {
+            abgab.innerText = "You guessed wrong! The number was " + answer;
+        }
+
+        modal.style.display = "flex";
+    });
+
+    function closeModal() {
+        modal.style.display = "none";
+    }
+  </script>
+</body>
+</html>
