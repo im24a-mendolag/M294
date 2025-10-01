@@ -8,7 +8,7 @@
 <body>
     <div id="myModal" class="modal">
         <div class="modal-button">
-            <p id="abgab"></p>
+            <p id="output"></p>
             <button class="btn btn-ok" onclick="closeModal()">OK</button>
         </div>
     </div>
@@ -21,18 +21,18 @@
   <script>
     const form = document.getElementById("form");
     const modal = document.getElementById("myModal");
-    const abgab = document.getElementById("abgab");
+    const output = document.getElementById("output");
 
     form.addEventListener("submit", function(e) {
         e.preventDefault(); 
 
-        let guess = parseInt(form.number.value.trim()); // Eingabe holen
-        let answer = Math.floor(Math.random() * 100) + 1; // 1-100
+        let guess = parseInt(form.number.value.trim()); 
+        let answer = Math.floor(Math.random() * 100) + 1; 
 
         if (guess === answer) {
-            abgab.innerText = "You guessed right! (" + answer + ")";
+            output.innerText = "You guessed right! (" + answer + ")";
         } else {
-            abgab.innerText = "You guessed wrong! The number was " + answer;
+            output.innerText = "You guessed wrong! The number was " + answer;
         }
 
         modal.style.display = "flex";
