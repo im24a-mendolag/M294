@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Formular mit Assistenzfunktion</title>
+</head>
+
+<body>
+  <form id="form">
+    <input type="text" name="vorname" placeholder="vorname" required>
+    <input type="text" name="nachname" placeholder="nachname" required>
+    <input type="text" name="strasse" placeholder="strasse" required>
+    <input type="text" name="postleitzahl" placeholder="postleitzahl" required>
+    <input type="text" name="ort" placeholder="ort" required>
+    <button type="submit">send</button>
+  </form>
+  <script>
+    const form = document.getElementById("form");
+    const ortInput = form.elements["ort"];
+    const plzInput = form.elements["postleitzahl"];
+    let places = [];
+
+    // Load the JSON file once
+    async function loadPlaces() {
+      const response = await fetch("places.json");
+      const data = await response.json();
+      // Assuming the JSON is an array of objects
+      places = data;
+    }
+    loadPlaces();
+
+    // Autocomplete city based on postal code
+    plzInput.addEventListener("input", function () {
+      const zip = plzInput.value.trim();
+      if (!zip) {
+        ortInput.value = "";
+        return;
+      }
+
+      // Find a matching postal code
+      const place = places.find(p => p.zipcode === zip);
+      if (place) {
+        ortInput.value = place.place; // fill city automatically
+      } else {
+        ortInput.value = "";
+      }
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controller</title>
+    <script src="class.js" defer></script>
+    <script src="script.js" defer></script>
+    <style>
+        :root {
+            --bg-start: #0f172a; /* slate-900 */
+            --bg-end: #1e293b;   /* slate-800 */
+            --card-bg: rgba(255, 255, 255, 0.06);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --text: #e5e7eb;     /* gray-200 */
+            --muted: #94a3b8;    /* slate-400 */
+            --primary: #22d3ee;  /* cyan-400 */
+            --primary-strong: #06b6d4; /* cyan-500 */
+            --shadow: rgba(2, 6, 23, 0.5);
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--text);
+            background: radial-gradient(1200px 800px at 70% 20%, var(--bg-end), var(--bg-start));
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+
+        .card {
+            width: min(640px, 92vw);
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 20px 40px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.04);
+            backdrop-filter: blur(6px);
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            margin: 0;
+            font-size: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        .subtitle {
+            margin: 4px 0 0 0;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .grid {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 64px);
+            grid-template-areas:
+                ".      up     ."
+                "left   .      right"
+                ".      down   .";
+            padding: 8px 0 4px 0;
+        }
+
+        #up { grid-area: up; }
+        #down { grid-area: down; }
+        #left { grid-area: left; }
+        #right { grid-area: right; }
+
+        button {
+            appearance: none;
+            border: 1px solid var(--card-border);
+            background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+            color: var(--text);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 15px;
+            letter-spacing: 0.2px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease, background 120ms ease;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 6px 16px rgba(2, 6, 23, 0.35);
+            user-select: none;
+        }
+
+        button:hover {
+            border-color: rgba(34, 211, 238, 0.35);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 22px rgba(2, 6, 23, 0.45);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .accent {
+            border-color: rgba(34, 211, 238, 0.4);
+            background: linear-gradient(180deg, rgba(34,211,238,0.18), rgba(34,211,238,0.06));
+        }
+
+        .kbd {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 12px;
+            color: var(--muted);
+            border: 1px solid var(--card-border);
+            padding: 2px 6px;
+            border-radius: 6px;
+            background: rgba(15, 23, 42, 0.4);
+        }
+
+        .footer {
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .legend {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .output {
+            margin-top: 16px;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+            line-height: 1.4;
+            max-height: 120px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <header>
+            <div>
+                <h1 class="title">Steuerkreuz</h1>
+                <p class="subtitle">Nutze die Richtungstasten, um zu steuern.</p>
+            </div>
+            <span class="kbd">WASD</span>
+        </header>
+
+        <div class="grid">
+            <button id="up" class="accent" aria-label="Oben">▲ Oben</button>
+            <button id="left" aria-label="Links">◀︎ Links</button>
+            <button id="right" aria-label="Rechts">Rechts ▶︎</button>
+            <button id="down" class="accent" aria-label="Unten">▼ Unten</button>
+        </div>
+
+        <div class="footer">
+            <div class="legend">
+                <span class="kbd">↑</span>
+                <span class="kbd">←</span>
+                <span class="kbd">→</span>
+                <span class="kbd">↓</span>
+                <span>oder</span>
+                <span class="kbd">W</span>
+                <span class="kbd">A</span>
+                <span class="kbd">S</span>
+                <span class="kbd">D</span>
+            </div>
+            <span>Design · minimal</span>
+        </div>
+    </div>
+    <div id="output" class="output"></div>
+
+</body>
+</html>
