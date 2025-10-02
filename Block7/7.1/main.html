@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Delete User Example</title>
+  <title>jsonplaceholder posts</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>JavaScript Fetch API</h1>
-<h2>The fetch() Method</h2>
+<h1>Posts von JSONplaceholder</h1>
 <div id="demo">Fetch a file to change this text.</div>
 
 <script>
@@ -21,7 +20,8 @@
         output += ` <div class="post">
                         <h3>${post.title}</h3>
                         <p>${post.body}</p>
-                    </div>`;
+                    </div>
+                  `;
         });
         
         console.log(response); 
