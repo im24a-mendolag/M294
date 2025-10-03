@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>jsonplaceholder posts</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <h1>temperatur</h1>
+  <div id="demo"></div>
+
+  <script>
+    const demo = document.getElementById("demo");
+
+    async function loadTemperature(plz) {
+      try {
+        const response = await fetch(`https://app-prod-ws.meteoswiss-app.ch/v1/plzDetail?plz=${plz}00`, {
+          method: "GET",
+          mode:"cors"
+        });
+        const data = await response.json();
+
+        const currentTemp = data.currentWeather.temperature;
+        console.log(currentTemp);
+
+        demo.innerHTML = `Aktuelle Temperatur für PLZ ${plz}: ${currentTemp}°C`;
+      } catch (error) {
+        console.error("Fehler beim Laden der Temperatur:", error);
+        demo.innerHTML = "Fehler beim Laden der Temperatur.";
+      }
+    }
+
+    loadTemperature("8000");
+  </script>
+
+</body>
+
+</html>

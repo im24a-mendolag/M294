@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Module 294 Tasks with JWT</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        h1 { text-align: center; }
+        .login-box, .task-box { border: 1px solid #ccc; padding: 20px; margin: 20px auto; max-width: 400px; }
+        input { display: block; width: 93%; margin: 5px auto; padding: 8px 12px; text-align: center; }
+        button { display: block; width: 100%; margin: 5px auto; padding: 8px 12px; text-align: center; }
+        ul { list-style: none; padding: 0; }
+        li { 
+            border: 1px solid #ddd; 
+            margin: 5px 0; 
+            padding: 10px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+        button.deleteBtn { 
+            width: auto; 
+            margin: 0; 
+            padding: 5px 10px;
+            background: #f44336;
+            color: white;
+            border: none;
+        }
+        button.editBtn { 
+            width: auto; 
+            margin: 0 5px 0 0; 
+            padding: 5px 10px;
+            background: #2196F3;
+            color: white;
+            border: none;
+        }
+        .button-container {
+            display: flex;
+            align-items: center;
+        }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Module 294 Tasks</h1>
+
+    <div class="login-box">
+        <h2>Login</h2>
+        <input type="text" id="email" placeholder="Email" value="info@example.com">
+        <input type="password" id="password" placeholder="Password" value="m294">
+        <button id="loginBtn">Login</button>
+        <p id="loginStatus" class="error"></p>
+    </div>
+
+    <div class="task-box" style="display:none;">
+        <h2>Tasks</h2>
+        <input type="text" id="newTask" placeholder="New Task">
+        <button id="addTaskBtn">Add</button>
+        <ul id="taskList"></ul>
+        <button id="logoutBtn">Logout</button>
+        <p id="taskStatus" class="error"></p>
+    </div>
+
+    <script>
+        const API_BASE = "http://localhost"; // Backend on port 80
+        let token = ""; // Store JWT token
+
+        const loginBtn = document.getElementById("loginBtn");
+        const logoutBtn = document.getElementById("logoutBtn");
+        const loginStatus = document.getElementById("loginStatus");
+        const taskBox = document.querySelector(".task-box");
+        const taskList = document.getElementById("taskList");
+        const addTaskBtn = document.getElementById("addTaskBtn");
+        const newTaskInput = document.getElementById("newTask");
+        const taskStatus = document.getElementById("taskStatus");
+
+        // Login with JWT
+        loginBtn.addEventListener("click", async () => {
+            loginStatus.textContent = "";
+            try {
+                const res = await fetch(API_BASE + "/auth/jwt/sign", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        email: document.getElementById("email").value,
+                        password: document.getElementById("password").value
+                    })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    token = data.token;
+                    document.querySelector(".login-box").style.display = "none";
+                    taskBox.style.display = "block";
+                    loadTasks();
+                } else {
+                    loginStatus.textContent = "Login failed!";
+                }
+            } catch (err) {
+                loginStatus.textContent = "Error: " + err;
+            }
+        });
+
+        // Load tasks
+        async function loadTasks() {
+            taskStatus.textContent = "";
+            try {
+                const res = await fetch(API_BASE + "/auth/jwt/tasks", {
+                    headers: { "Authorization": "Bearer " + token }
+                });
+                if (!res.ok) {
+                    taskStatus.textContent = "Error loading tasks!";
+                    return;
+                }
+                const tasks = await res.json();
+                taskList.innerHTML = "";
+                tasks.forEach(task => {
+                    const li = document.createElement("li");
+                    li.textContent = task.title;
+
+                    // Create button container
+                    const buttonContainer = document.createElement("div");
+                    buttonContainer.classList.add("button-container");
+
+                    const editBtn = document.createElement("button");
+                    editBtn.textContent = "Edit";
+                    editBtn.classList.add("editBtn");
+                    editBtn.addEventListener("click", () => editTask(task.id));
+
+                    const delBtn = document.createElement("button");
+                    delBtn.textContent = "Delete";
+                    delBtn.classList.add("deleteBtn");
+                    delBtn.addEventListener("click", () => deleteTask(task.id));
+
+                    // Add buttons to container
+                    buttonContainer.appendChild(editBtn);
+                    buttonContainer.appendChild(delBtn);
+
+                    // Add container to list item
+                    li.appendChild(buttonContainer);
+                    taskList.appendChild(li);
+                });
+            } catch (err) {
+                taskStatus.textContent = "Error: " + err;
+            }
+        }
+
+        // Add task
+        addTaskBtn.addEventListener("click", async () => {
+            const title = newTaskInput.value;
+            if (!title) return;
+            try {
+                const res = await fetch(API_BASE + "/auth/jwt/tasks", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + token
+                    },
+                    body: JSON.stringify({ title, completed: false })
+                });
+                if (res.ok) {
+                    newTaskInput.value = "";
+                    loadTasks();
+                } else {
+                    taskStatus.textContent = "Error adding task!";
+                }
+            } catch (err) {
+                taskStatus.textContent = "Error: " + err;
+            }
+        });
+
+        // Delete task
+        async function deleteTask(id) {
+            try {
+                const res = await fetch(`${API_BASE}/auth/jwt/task/${id}`, {
+                    method: "DELETE",
+                    headers: { "Authorization": "Bearer " + token }
+                });
+                if (res.ok) loadTasks();
+                else taskStatus.textContent = "Error deleting task!";
+            } catch (err) {
+                taskStatus.textContent = "Error: " + err;
+            }
+        }
+
+        // Logout
+        logoutBtn.addEventListener("click", () => {
+            token = "";
+            taskBox.style.display = "none";
+            document.querySelector(".login-box").style.display = "block";
+            loginStatus.textContent = "";
+        });
+        
+        async function editTask(id) {
+            const newTitle = prompt("Enter new task title:");
+            if (!newTitle || newTitle.trim() === "") return;
+            
+            try {
+                const res = await fetch(`${API_BASE}/auth/jwt/tasks`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + token
+                    },
+                    body: JSON.stringify({ 
+                        id: id,
+                        title: newTitle.trim(),
+                        completed: false
+                    })
+                });
+                
+                if (res.ok) {
+                    loadTasks();
+                } else {
+                    const errorText = await res.text();
+                    taskStatus.textContent = "Error updating task: " + errorText;
+                }
+            } catch (err) {
+                taskStatus.textContent = "Error: " + err;
+            }
+        }
+
+        // Logout
+        logoutBtn.addEventListener("click", () => {
+            token = "";
+            taskBox.style.display = "none";
+            document.querySelector(".login-box").style.display = "block";
+            loginStatus.textContent = "";
+        });
+    </script>
+</body>
+</html>
